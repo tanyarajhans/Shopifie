@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shopifie/screens/bottom_bar.dart';
 import 'package:shopifie/screens/home.dart';
 
 void main() {
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: Home(),
+      home: BottomBar(),
     );
   }
 }
