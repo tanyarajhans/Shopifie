@@ -6,13 +6,34 @@ class UserInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Title('User Info'),
           UserListTile('Email', 'Email sub', 0, (){}),
           UserListTile('Phone', '4555', 1, (){}),
-          UserListTile('Shipping Address', 'Email sub', 2, (){}),
-          UserListTile('Joined date', 'Email sub', 3, (){}),
+          UserListTile('Shipping Address', '', 2, (){}),
+          UserListTile('Joined date', 'date', 3, (){}),
         ]
       )
+    );
+  }
+}
+
+class Title extends StatelessWidget {
+  
+  String title;
+  Title(this.title);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Text(title,
+      style: TextStyle(
+        fontSize: 22,
+        fontWeight: FontWeight.bold
+      )),
     );
   }
 }
