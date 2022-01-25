@@ -7,15 +7,24 @@ class UserInfo extends StatefulWidget {
   State<UserInfo> createState() => _UserInfoState();
 }
 
+ScrollController _scrollController = ScrollController();
 class _UserInfoState extends State<UserInfo> {
   bool _value = false;
-  ScrollController _scrollController = ScrollController();
+  
   var top=0.0;
-
+  @override
+  void initState() {
+    super.initState();
+    _scrollController = ScrollController();
+    _scrollController.addListener(() {
+      setState(() {});
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: CustomScrollView(
+        body: Stack(
+        children: [CustomScrollView(
             controller: _scrollController,
             slivers: <Widget>[
               SliverAppBar(
@@ -136,12 +145,62 @@ class _UserInfoState extends State<UserInfo> {
                 
       ]
                 )
-              )
-               
+              ),
+              
+            //  _buildFab() 
+            ],
+            ),
+            _buildFab()
             ]
             )
             );
   }
+
+  
+  }
+
+Widget _buildFab() {
+
+    final double defaultTopMargin = 200.0 - 4.0;
+    //pixels from top where scaling should start
+    final double scaleStart = 160.0;
+    //pixels from top where scaling should end
+    final double scaleEnd = 80.0;
+
+    double top = defaultTopMargin;
+    double scale = 1.0;
+    if (_scrollController.hasClients) {
+      double offset = _scrollController.offset;
+      top -= offset;
+      if (offset < defaultTopMargin - scaleStart) {
+        //offset small => don't scale down
+
+        scale = 1.0;
+      } else if (offset < defaultTopMargin - scaleEnd) {
+        //offset between scaleStart and scaleEnd => scale down
+
+        scale = (defaultTopMargin - scaleEnd - offset) / scaleEnd;
+      } else {
+        //offset passed scaleEnd => hide fab
+        scale = 0.0;
+      }
+    }
+  
+    return Positioned(
+      top: top,
+      right: 16.0,
+      child: Transform(
+        transform: Matrix4.identity()..scale(scale),
+        alignment: Alignment.center,
+        child: FloatingActionButton(
+          backgroundColor: Colors.purple,
+          heroTag: "btn1",
+          onPressed: () {},
+          child: Icon(Icons.camera_alt_outlined),
+        ),
+      ),
+    );
+  
 }
 
 class Title extends StatelessWidget {
@@ -210,3 +269,4 @@ class UserTitle extends StatelessWidget {
     );
   }
 }
+
