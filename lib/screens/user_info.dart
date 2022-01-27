@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:list_tile_switch/list_tile_switch.dart';
+import 'package:provider/provider.dart';
 import 'package:shopifie/consts/colors.dart';
+import 'package:shopifie/provider/dark_theme_provider.dart';
 
 class UserInfo extends StatefulWidget {
   @override
@@ -9,7 +11,7 @@ class UserInfo extends StatefulWidget {
 
 ScrollController _scrollController = ScrollController();
 class _UserInfoState extends State<UserInfo> {
-  bool _value = false;
+  
   
   var top=0.0;
   @override
@@ -22,6 +24,7 @@ class _UserInfoState extends State<UserInfo> {
   }
   @override
   Widget build(BuildContext context) {
+    final themeChange = Provider.of<DarkThemeProvider>(context);
     return Scaffold(
         body: Stack(
         children: [CustomScrollView(
@@ -157,17 +160,12 @@ class _UserInfoState extends State<UserInfo> {
           UserListTile('Phone', '4555', 1, (){}),
           UserListTile('Shipping Address', '', 2, (){}),
           UserListTile('Joined date', 'date', 3, (){}),
-          UserListTile('Joined date', 'date', 3, (){}),
-          UserListTile('Joined date', 'date', 3, (){}),
-          UserListTile('Joined date', 'date', 3, (){}),
-          UserListTile('Joined date', 'date', 3, (){}),
-          UserListTile('Joined date', 'date', 3, (){}),
           ListTileSwitch(  
-	    value: _value,  
-		leading: Icon(Icons.wb_sunny),  
+	    value: themeChange.darkTheme,  
+		leading: Icon(Icons.mode_night_outlined),  
 		onChanged: (value) {  
 		  setState(() {  
-			_value = value;  
+			themeChange.darkTheme = value;  
 		  });
 		},
 		switchType: SwitchType.cupertino,
