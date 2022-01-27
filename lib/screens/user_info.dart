@@ -114,6 +114,41 @@ class _UserInfoState extends State<UserInfo> {
                       thickness: 1,
                       color: Colors.grey,
                     ),
+                    Material(
+                      color: Colors.transparent,
+                      child: InkWell(
+                        onTap: () => {},
+                        splashColor: Colors.red,
+                        child: ListTile(
+                          title: Text('Wishlist'),
+                          trailing: Icon(Icons.chevron_right_rounded),
+                          leading: Icon(Icons.favorite),
+                        ),
+                      ),
+                    ),
+                    ListTile(
+                      onTap: () {
+                        
+                      },
+                      title: Text('Cart'),
+                      trailing: Icon(Icons.chevron_right_rounded),
+                      leading: Icon(Icons.shopping_cart),
+                    ),
+                    ListTile(
+                      onTap: () => (){},
+                      title: Text('My Orders'),
+                      trailing: Icon(Icons.chevron_right_rounded),
+                      leading: Icon(Icons.shopping_bag),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 8.0),
+                      child: UserTitle('User Information'),
+                    ),
+                    Divider(
+                      thickness: 1,
+                      color: Colors.grey,
+                    ),
+
                     Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -165,7 +200,7 @@ Widget _buildFab() {
     //pixels from top where scaling should start
     final double scaleStart = 160.0;
     //pixels from top where scaling should end
-    final double scaleEnd = 80.0;
+    final double scaleEnd = scaleStart/2;
 
     double top = defaultTopMargin;
     double scale = 1.0;
