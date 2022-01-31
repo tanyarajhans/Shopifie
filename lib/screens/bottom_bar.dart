@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:shopifie/screens/cart.dart';
+import 'package:shopifie/screens/cart_empty.dart';
 import 'package:shopifie/screens/feeds.dart';
 import 'package:shopifie/screens/home.dart';
 import 'package:shopifie/screens/search.dart';
