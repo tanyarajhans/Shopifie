@@ -16,7 +16,7 @@ class _CartFullState extends State<CartFull> {
     final themeChange = Provider.of<DarkThemeProvider>(context);
     return Container(
       height: 135,
-      margin: EdgeInsets.all(30.0),
+      margin: EdgeInsets.all(10.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.only(bottomRight: Radius.circular(16.0),
         topRight: Radius.circular(16.0),
@@ -30,7 +30,7 @@ class _CartFullState extends State<CartFull> {
           Container(
             width: 130,
             decoration: BoxDecoration(
-              image: DecorationImage(image: NetworkImage('https://pbs.twimg.com/profile_images/1283958620359516160/p7zz5dxZ.jpg'),
+              image: DecorationImage(image: NetworkImage('https://m.media-amazon.com/images/I/71D9ImsvEtL._UY500_.jpg'),
               fit: BoxFit.fill
               )
             ),),

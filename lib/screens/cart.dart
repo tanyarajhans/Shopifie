@@ -18,7 +18,9 @@ class Cart extends StatelessWidget {
         icon: Icon(
           Icons.delete))],
       ),
-      body: CartFull(),
+      body: Container(
+        margin: EdgeInsets.only(bottom: 10.0),
+        child: ListView.builder(itemCount: 5,itemBuilder: (context, index) => CartFull())),
       
     );
   }
