@@ -6,8 +6,9 @@ class Cart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List products = [];
     return Scaffold(
-      body: CartFull()
+      body: products.isEmpty? CartEmpty(): CartFull()
       
     );
   }
