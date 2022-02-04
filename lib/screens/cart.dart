@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:shopifie/screens/cart_empty.dart';
-import 'package:shopifie/screens/cart_full.dart';
+import 'package:shopifie/widget/cart_empty.dart';
+import 'package:shopifie/widget/cart_full.dart';
+
+import '../consts/colors.dart';
 
 class Cart extends StatelessWidget {
 
@@ -43,24 +45,36 @@ class CheckOutSection extends StatelessWidget {
           children: [
           Expanded(
             flex: 2,
-            child: Material(
-              borderRadius: BorderRadius.circular(30.0),
-              color: Colors.red,
-              child: InkWell(
-                onTap: (){},
+            child: Container(
+              decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(30.0),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text('Checkout', 
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Theme.of(context).textSelectionColor,
-                    fontSize: 18.0,
-                    fontWeight: FontWeight.w600,
-                    
-                  )),
+                              gradient: LinearGradient(colors: [
+                                ColorsConsts.gradiendLStart,
+                                ColorsConsts.gradiendLEnd,
+                              ], stops: [
+                                0.0,
+                                0.7
+                              ]),
+                            ),
+              child: Material(
+                
+                color: Colors.transparent,
+                child: InkWell(
+                  onTap: (){},
+                  borderRadius: BorderRadius.circular(30.0),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text('Checkout', 
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Theme.of(context).textSelectionColor,
+                      fontSize: 18.0,
+                      fontWeight: FontWeight.w600,
+                      
+                    )),
+                  )
                 )
-              )
+              ),
             ),
           ),
           Spacer(),

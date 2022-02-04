@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:shopifie/screens/cart.dart';
-import 'package:shopifie/screens/cart_empty.dart';
+import 'package:shopifie/widget/cart_empty.dart';
 import 'package:shopifie/screens/feeds.dart';
 import 'package:shopifie/screens/home.dart';
 import 'package:shopifie/screens/search.dart';
@@ -24,7 +24,7 @@ class _BottomBarState extends State<BottomBar> {
     UserInfo()
   ];
 
-  int _index=4;
+  int _index=1;
 
   void _selectedPage(int index){
     setState(() {
