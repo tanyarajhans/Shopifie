@@ -24,7 +24,7 @@ class _BottomBarState extends State<BottomBar> {
     UserInfo()
   ];
 
-  int _index=1;
+  int _index=0;
 
   void _selectedPage(int index){
     setState(() {
