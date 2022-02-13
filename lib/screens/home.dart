@@ -1,6 +1,8 @@
 import 'package:backdrop/backdrop.dart';
+import 'package:card_swiper/card_swiper.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:shopifie/widget/category.dart';
 
 import '../consts/colors.dart';
 
@@ -28,6 +30,7 @@ final List<String> imgList = [
   Widget build(BuildContext context) {
     return Scaffold(
       body: BackdropScaffold(
+        frontLayerBackgroundColor: Theme.of(context).scaffoldBackgroundColor,
         appBar: BackdropAppBar(
           title: Text("Home"),
           leading: BackdropToggleButton(
@@ -61,19 +64,76 @@ final List<String> imgList = [
         backLayer: const Center(
           child: Text("Back Layer"),
         ),
-        frontLayer: Container(
-          height:190,
-          width: double.infinity,
-          child: CarouselSlider(
-          options: CarouselOptions(),
-          items: imgList
-              .map((item) => Container(
-                    child: Center(
-                        child:
-                            Image.network(item, fit: BoxFit.cover, width: 1000)),
-                  ))
-              .toList(),
+        frontLayer: Column(
+          children: [
+            Container(
+              height:190,
+              width: double.infinity,
+              child: CarouselSlider(
+              options: CarouselOptions(),
+              items: imgList
+                  .map((item) => Container(
+                        child: Center(
+                            child:
+                                Image.network(item, fit: BoxFit.cover, width: 1000)),
+                      ))
+                  .toList(),
       ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child:
+                Text('Categories', 
+                style: TextStyle(
+                  fontWeight: FontWeight.w800,
+                  fontSize: 20.0
+                ),),
+              ),
+            Container(
+              height: 180,
+              width: double.infinity,
+              
+              child: ListView.builder(
+                itemCount: 7,
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (BuildContext context, int index){
+                return Category(index);
+              }),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(children: [
+                Text('Popular Brands', 
+                style: TextStyle(
+                  fontWeight: FontWeight.w800,
+                  fontSize: 20.0
+                ),),
+                Spacer(),
+                TextButton(onPressed: (){}, child: Text('View All', 
+                style: TextStyle(
+                  fontWeight: FontWeight.w800,
+                  fontSize: 15.0,
+                  color: Colors.red
+                ),),)
+              ],),
+            ),
+            Container(
+              height: 210,
+              width: MediaQuery.of(context).size.width*0.95,
+              color: Colors.blueGrey,
+              child: Swiper(
+        itemBuilder: (BuildContext context,int index){
+          return ClipRRect(
+            child: Image.network(imgList[index],
+            fit: BoxFit.fill),
+          );
+        },
+        itemCount: imgList.length,
+        pagination: SwiperPagination(),
+        control: SwiperControl(),
+      ),
+            ),
+          ],
         )
       ),
       
