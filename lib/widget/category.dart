@@ -47,7 +47,9 @@ class Category extends StatelessWidget {
         Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
-            image: DecorationImage(image: AssetImage(categories[index]['categoryImagesPath'].toString()),
+            image: DecorationImage(image: AssetImage(categories[index]['categoryImagesPath'].toString(),
+             ),
+             fit: BoxFit.cover
             )
           ),
           margin: EdgeInsets.symmetric(horizontal: 10),
@@ -57,9 +59,13 @@ class Category extends StatelessWidget {
 
         Positioned(
           bottom:0,
+          left:10,
+          right: 10,
           child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
             color: Theme.of(context).backgroundColor,
-            child: Text(categories[index]['categoryName'].toString())
+            child: Text(categories[index]['categoryName'].toString(),
+            )
             )
           )
       ],

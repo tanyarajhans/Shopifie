@@ -3,6 +3,7 @@ import 'package:card_swiper/card_swiper.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:shopifie/widget/category.dart';
+import 'package:shopifie/widget/popular_products.dart';
 
 import '../consts/colors.dart';
 
@@ -65,6 +66,7 @@ final List<String> imgList = [
           child: Text("Back Layer"),
         ),
         frontLayer: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
               height:190,
@@ -103,7 +105,7 @@ final List<String> imgList = [
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(children: [
-                Text('Popular Brands', 
+                Text('Popular Products', 
                 style: TextStyle(
                   fontWeight: FontWeight.w800,
                   fontSize: 20.0
@@ -118,21 +120,16 @@ final List<String> imgList = [
               ],),
             ),
             Container(
-              height: 210,
-              width: MediaQuery.of(context).size.width*0.95,
-              color: Colors.blueGrey,
-              child: Swiper(
-        itemBuilder: (BuildContext context,int index){
-          return ClipRRect(
-            child: Image.network(imgList[index],
-            fit: BoxFit.fill),
-          );
-        },
-        itemCount: imgList.length,
-        pagination: SwiperPagination(),
-        control: SwiperControl(),
+              height: 255,
+              width: double.infinity,
+              margin: EdgeInsets.symmetric(horizontal: 3),
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: 8,
+                itemBuilder: (BuildContext context, int index){
+                return PopularProducts();
+              })
       ),
-            ),
           ],
         )
       ),
