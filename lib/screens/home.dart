@@ -2,10 +2,12 @@ import 'package:backdrop/backdrop.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:shopifie/widget/backlayer.dart';
 import 'package:shopifie/widget/category.dart';
 import 'package:shopifie/widget/popular_products.dart';
 
 import '../consts/colors.dart';
+import '../inner_screens/brands_navigation_rail.dart';
 
 
 
@@ -32,6 +34,7 @@ final List<String> imgList = [
     return Scaffold(
       body: BackdropScaffold(
         frontLayerBackgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        headerHeight: MediaQuery.of(context).size.height * 0.25,
         appBar: BackdropAppBar(
           title: Text("Home"),
           leading: BackdropToggleButton(
@@ -62,9 +65,7 @@ final List<String> imgList = [
             )
           ],
         ),
-        backLayer: const Center(
-          child: Text("Back Layer"),
-        ),
+        backLayer: BackLayerMenu(),
         frontLayer: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -112,7 +113,9 @@ final List<String> imgList = [
                     fontSize: 20.0
                   ),),
                   Spacer(),
-                  TextButton(onPressed: (){}, child: Text('View All', 
+                  TextButton(onPressed: (){
+                    
+                  }, child: Text('View All', 
                   style: TextStyle(
                     fontWeight: FontWeight.w800,
                     fontSize: 15.0,

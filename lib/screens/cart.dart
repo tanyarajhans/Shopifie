@@ -5,6 +5,7 @@ import 'package:shopifie/widget/cart_full.dart';
 import '../consts/colors.dart';
 
 class Cart extends StatelessWidget {
+  static const routeName = '/Cart';
 
   @override
   Widget build(BuildContext context) {
