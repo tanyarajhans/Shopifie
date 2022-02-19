@@ -65,72 +65,74 @@ final List<String> imgList = [
         backLayer: const Center(
           child: Text("Back Layer"),
         ),
-        frontLayer: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              height:190,
-              width: double.infinity,
-              child: CarouselSlider(
-              options: CarouselOptions(),
-              items: imgList
-                  .map((item) => Container(
-                        child: Center(
-                            child:
-                                Image.network(item, fit: BoxFit.cover, width: 1000)),
-                      ))
-                  .toList(),
-      ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child:
-                Text('Categories', 
-                style: TextStyle(
-                  fontWeight: FontWeight.w800,
-                  fontSize: 20.0
-                ),),
+        frontLayer: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                height:190,
+                width: double.infinity,
+                child: CarouselSlider(
+                options: CarouselOptions(),
+                items: imgList
+                    .map((item) => Container(
+                          child: Center(
+                              child:
+                                  Image.network(item, fit: BoxFit.cover, width: 1000)),
+                        ))
+                    .toList(),
               ),
-            Container(
-              height: 180,
-              width: double.infinity,
-              
-              child: ListView.builder(
-                itemCount: 7,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (BuildContext context, int index){
-                return Category(index);
-              }),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(children: [
-                Text('Popular Products', 
-                style: TextStyle(
-                  fontWeight: FontWeight.w800,
-                  fontSize: 20.0
-                ),),
-                Spacer(),
-                TextButton(onPressed: (){}, child: Text('View All', 
-                style: TextStyle(
-                  fontWeight: FontWeight.w800,
-                  fontSize: 15.0,
-                  color: Colors.red
-                ),),)
-              ],),
-            ),
-            Container(
-              height: 255,
-              width: double.infinity,
-              margin: EdgeInsets.symmetric(horizontal: 3),
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: 8,
-                itemBuilder: (BuildContext context, int index){
-                return PopularProducts();
-              })
-      ),
-          ],
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child:
+                  Text('Categories', 
+                  style: TextStyle(
+                    fontWeight: FontWeight.w800,
+                    fontSize: 20.0
+                  ),),
+                ),
+              Container(
+                height: 180,
+                width: double.infinity,
+                
+                child: ListView.builder(
+                  itemCount: 7,
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (BuildContext context, int index){
+                  return Category(index);
+                }),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(children: [
+                  Text('Popular Products', 
+                  style: TextStyle(
+                    fontWeight: FontWeight.w800,
+                    fontSize: 20.0
+                  ),),
+                  Spacer(),
+                  TextButton(onPressed: (){}, child: Text('View All', 
+                  style: TextStyle(
+                    fontWeight: FontWeight.w800,
+                    fontSize: 15.0,
+                    color: Colors.red
+                  ),),)
+                ],),
+              ),
+              Container(
+                height: 255,
+                width: double.infinity,
+                margin: EdgeInsets.symmetric(horizontal: 3),
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: 8,
+                  itemBuilder: (BuildContext context, int index){
+                  return PopularProducts();
+                })
+              ),
+            ],
+          ),
         )
       ),
       

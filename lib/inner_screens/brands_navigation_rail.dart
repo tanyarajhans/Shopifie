@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shopifie/inner_screens/brands_rail_widget.dart';
 
 
 class BrandNavigationRailScreen extends StatefulWidget {
