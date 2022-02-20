@@ -3,6 +3,7 @@ import 'package:list_tile_switch/list_tile_switch.dart';
 import 'package:provider/provider.dart';
 import 'package:shopifie/consts/colors.dart';
 import 'package:shopifie/provider/dark_theme_provider.dart';
+import 'package:shopifie/screens/wishlist.dart';
 
 class UserInfo extends StatefulWidget {
   @override
@@ -120,7 +121,9 @@ class _UserInfoState extends State<UserInfo> {
                     Material(
                       color: Colors.transparent,
                       child: InkWell(
-                        onTap: () => {},
+                        onTap: () => {
+                          Navigator.pushNamed(context, Wishlist.routeName)
+                        },
                         splashColor: Colors.red,
                         child: ListTile(
                           title: Text('Wishlist'),
@@ -143,6 +146,7 @@ class _UserInfoState extends State<UserInfo> {
                       trailing: Icon(Icons.chevron_right_rounded),
                       leading: Icon(Icons.shopping_bag),
                     ),
+                    
                     Padding(
                       padding: const EdgeInsets.only(left: 8.0),
                       child: UserTitle('User Information'),
