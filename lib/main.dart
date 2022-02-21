@@ -4,6 +4,7 @@ import 'package:shopifie/consts/theme_data.dart';
 import 'package:shopifie/inner_screens/brands_navigation_rail.dart';
 import 'package:shopifie/inner_screens/product_details.dart';
 import 'package:shopifie/provider/dark_theme_provider.dart';
+import 'package:shopifie/provider/products.dart';
 import 'package:shopifie/screens/bottom_bar.dart';
 import 'package:shopifie/screens/cart.dart';
 import 'package:shopifie/screens/feeds.dart';
@@ -40,6 +41,9 @@ class _MyAppState extends State<MyApp> {
     return MultiProvider(providers: [
       ChangeNotifierProvider(create: (_){
         return themeChangeProvider;
+      }),
+      ChangeNotifierProvider(create: (_){
+        return Products();
       }),
     ],
      child: Consumer<DarkThemeProvider>(

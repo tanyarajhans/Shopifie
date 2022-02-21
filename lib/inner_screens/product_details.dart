@@ -219,13 +219,13 @@ class _ProductDetailsState extends State<ProductDetails> {
                   margin: EdgeInsets.only(bottom: 30),
                   width: double.infinity,
                   height: 340,
-                  child: ListView.builder(
-                    itemCount:7,
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (BuildContext ctx, int index) {
-                      return FeedProducts();
-                    },
-                  ),
+                  // child: ListView.builder(
+                  //   itemCount:7,
+                  //   scrollDirection: Axis.horizontal,
+                  //   // itemBuilder: (BuildContext ctx, int index) {
+                  //   //   return ;
+                  //   // },
+                  // ),
                 ),
               ],
             ),
