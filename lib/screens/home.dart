@@ -2,6 +2,7 @@ import 'package:backdrop/backdrop.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:shopifie/screens/feeds.dart';
 import 'package:shopifie/widget/backlayer.dart';
 import 'package:shopifie/widget/category.dart';
 import 'package:shopifie/widget/popular_products.dart';
@@ -29,6 +30,15 @@ final List<String> imgList = [
   'https://images.unsplash.com/photo-1519985176271-adb1088fa94c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a0c8d632e977f94e5d312d9893258f59&auto=format&fit=crop&w=1355&q=80'
 ];
 
+List _brandImages = [
+    'assets/images/addidas.jpeg',
+    'assets/images/apple.jpeg',
+    'assets/images/Dell.jpeg',
+    'assets/images/h&m.jpeg',
+    'assets/images/nike.jpeg',
+    'assets/images/samsung.jpeg',
+    'assets/images/Huawei.jpeg',
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -84,6 +94,7 @@ final List<String> imgList = [
                     .toList(),
               ),
               ),
+              
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child:
@@ -106,6 +117,66 @@ final List<String> imgList = [
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  children: [
+                    Text(
+                      'Popular Brands',
+                      style:
+                          TextStyle(fontWeight: FontWeight.w800, fontSize: 20),
+                    ),
+                    Spacer(),
+                    FlatButton(
+                      onPressed: () {
+                        Navigator.of(context).pushNamed(
+                          BrandNavigationRailScreen.routeName,
+                          arguments: {
+                            7,
+                          },
+                        );
+                      },
+                      child: Text(
+                        'View all...',
+                        style: TextStyle(
+                            fontWeight: FontWeight.w800,
+                            fontSize: 15,
+                            color: Colors.red),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 210,
+                width: MediaQuery.of(context).size.width * 0.95,
+                child: Swiper(
+                  itemCount: _brandImages.length,
+                  autoplay: true,
+                  viewportFraction: 0.8,
+                  scale: 0.9,
+                  onTap: (index) {
+                    Navigator.of(context).pushNamed(
+                      BrandNavigationRailScreen.routeName,
+                      arguments: {
+                        index,
+                      },
+                    );
+                  },
+                  itemBuilder: (BuildContext ctx, int index) {
+                    return ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: Container(
+                        color: Colors.blueGrey,
+                        child: Image.asset(
+                          _brandImages[index],
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
                 child: Row(children: [
                   Text('Popular Products', 
                   style: TextStyle(
@@ -114,7 +185,8 @@ final List<String> imgList = [
                   ),),
                   Spacer(),
                   TextButton(onPressed: (){
-                    
+                    Navigator.of(context)
+                            .pushNamed(Feeds.routeName, arguments: 'popular');
                   }, child: Text('View All', 
                   style: TextStyle(
                     fontWeight: FontWeight.w800,
@@ -129,9 +201,9 @@ final List<String> imgList = [
                 margin: EdgeInsets.symmetric(horizontal: 3),
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
-                  itemCount: 8,
+                  itemCount: 7,
                   itemBuilder: (BuildContext context, int index){
-                  return PopularProducts();
+                  return const PopularProducts();
                 })
               ),
             ],
