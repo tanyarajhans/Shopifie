@@ -2,9 +2,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../models/product.dart';
+
 class BrandsNavigationRail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final productsAttributes = Provider.of<Product>(context);
     return InkWell(
       onTap: () => {},
       child: Container(
@@ -21,7 +24,7 @@ class BrandsNavigationRail extends StatelessWidget {
                   color: Theme.of(context).backgroundColor,
                   image: DecorationImage(
                     image: NetworkImage(
-                      'https://m.media-amazon.com/images/I/71D9ImsvEtL._UY500_.jpg',
+                     productsAttributes.imageUrl,
                     ),
                   ),
                   borderRadius: BorderRadius.all(Radius.circular(10.0)),
@@ -54,7 +57,7 @@ class BrandsNavigationRail extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      'Title',
+                      productsAttributes.title,
                       maxLines: 4,
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
@@ -64,7 +67,7 @@ class BrandsNavigationRail extends StatelessWidget {
                       height: 20.0,
                     ),
                     FittedBox(
-                      child: Text('US 122 \$',
+                      child: Text(productsAttributes.price.toString(),
                           maxLines: 1,
                           style: TextStyle(
                             color: Colors.red,
@@ -74,7 +77,7 @@ class BrandsNavigationRail extends StatelessWidget {
                     SizedBox(
                       height: 20.0,
                     ),
-                    Text('Shoes',
+                    Text(productsAttributes.productCategoryName,
                         style: TextStyle(color: Colors.grey, fontSize: 18.0)),
                     SizedBox(
                       height: 20.0,

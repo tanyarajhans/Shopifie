@@ -2,6 +2,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shopifie/inner_screens/brands_rail_widget.dart';
+import 'package:shopifie/provider/products.dart';
+
+import '../models/product.dart';
 
 
 class BrandNavigationRailScreen extends StatefulWidget {
@@ -19,7 +22,7 @@ class _BrandNavigationRailScreenState extends State<BrandNavigationRailScreen> {
   String? brand;
   @override
   void didChangeDependencies() {
-    routeArgs = ModalRoute.of(context)?.settings.arguments.toString();
+    routeArgs = ModalRoute.of(context)?.settings.arguments.toString(); //index received
     _selectedIndex = int.parse(
       routeArgs!.substring(1, 2),
     );
@@ -204,7 +207,8 @@ class ContentSpace extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   
+   final productsData = Provider.of<Products>(context);
+   final productsBrand = productsData.findByBrand(brand);
     return Expanded(
       child: Padding(
         padding: const EdgeInsets.fromLTRB(24, 8, 0, 0),
@@ -212,9 +216,11 @@ class ContentSpace extends StatelessWidget {
           removeTop: true,
           context: context,
           child: ListView.builder(
-                  itemCount: 5,
+                  itemCount: productsBrand.length,
                   itemBuilder: (BuildContext context, int index) =>
-                      BrandsNavigationRail()
+                      ChangeNotifierProvider.value(
+                        value: productsBrand[index],
+                        child: BrandsNavigationRail())
                 ),
         ),
       ),
