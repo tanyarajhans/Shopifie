@@ -2,10 +2,13 @@
 
 import 'package:flutter/material.dart';
 
+import '../inner_screens/categories_feeds.dart';
+import '../screens/feeds.dart';
+
 class Category extends StatelessWidget {
 
   int index;
-  Category(this.index);
+  Category(this.index, {Key? key}) : super(key: key);
 
   List<Map<String, Object>> categories = [
     {
@@ -44,17 +47,23 @@ class Category extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            image: DecorationImage(image: AssetImage(categories[index]['categoryImagesPath'].toString(),
-             ),
-             fit: BoxFit.cover
-            )
+        InkWell(
+          onTap: (){
+            Navigator.pushNamed(context, CategoriesFeeds.routeName, 
+            arguments: '${categories[index]['categoryName']}');
+          },
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              image: DecorationImage(image: AssetImage(categories[index]['categoryImagesPath'].toString(),
+               ),
+               fit: BoxFit.cover
+              )
+            ),
+            margin: EdgeInsets.symmetric(horizontal: 10),
+            width: 150,
+            height: 150
           ),
-          margin: EdgeInsets.symmetric(horizontal: 10),
-          width: 150,
-          height: 150
         ),
 
         Positioned(

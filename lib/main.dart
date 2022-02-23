@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shopifie/consts/theme_data.dart';
 import 'package:shopifie/inner_screens/brands_navigation_rail.dart';
+import 'package:shopifie/inner_screens/categories_feeds.dart';
 import 'package:shopifie/inner_screens/product_details.dart';
 import 'package:shopifie/provider/dark_theme_provider.dart';
 import 'package:shopifie/provider/products.dart';
@@ -57,7 +58,8 @@ class _MyAppState extends State<MyApp> {
           Cart.routeName : (context) => Cart(),
           Feeds.routeName : (context) => Feeds(),
           Wishlist.routeName : (context) => Wishlist(),
-          ProductDetails.routeName :(context) => ProductDetails()
+          ProductDetails.routeName :(context) => ProductDetails(),
+          CategoriesFeeds.routeName:(context) => CategoriesFeeds()
         },
       );
       }
