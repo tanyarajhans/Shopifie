@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shopifie/inner_screens/product_details.dart';
 
 import '../models/product.dart';
 
@@ -9,7 +10,9 @@ class BrandsNavigationRail extends StatelessWidget {
   Widget build(BuildContext context) {
     final productsAttributes = Provider.of<Product>(context);
     return InkWell(
-      onTap: () => {},
+      onTap: () => {
+        Navigator.pushNamed(context, ProductDetails.routeName)
+      },
       child: Container(
         //  color: Colors.red,
         padding: EdgeInsets.only(left: 5.0, right: 5.0),

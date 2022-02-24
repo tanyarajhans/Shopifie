@@ -2,6 +2,9 @@ import 'package:backdrop/backdrop.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shopifie/models/product.dart';
+import 'package:shopifie/provider/products.dart';
 import 'package:shopifie/screens/feeds.dart';
 import 'package:shopifie/widget/backlayer.dart';
 import 'package:shopifie/widget/category.dart';
@@ -41,6 +44,8 @@ List _brandImages = [
   ];
   @override
   Widget build(BuildContext context) {
+    final productsData = Provider.of<Products>(context);
+    final popularItems = productsData.findPopularProducts;
     return Scaffold(
       body: BackdropScaffold(
         frontLayerBackgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -201,9 +206,12 @@ List _brandImages = [
                 margin: EdgeInsets.symmetric(horizontal: 3),
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
-                  itemCount: 7,
+                  itemCount: popularItems.length,
                   itemBuilder: (BuildContext context, int index){
-                  return const PopularProducts();
+                  return ChangeNotifierProvider.value(
+                    value: popularItems[index],
+                    child: PopularProducts()
+                  );
                 })
               ),
             ],
@@ -214,3 +222,5 @@ List _brandImages = [
     );
   }
 }
+
+//popularItems[index].imageUrl, popularItems[index].title, popularItems[index].description, popularItems[index].price)

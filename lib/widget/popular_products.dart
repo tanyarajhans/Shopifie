@@ -1,10 +1,22 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../models/product.dart';
 
 class PopularProducts extends StatelessWidget {
-  const PopularProducts({ Key? key }) : super(key: key);
+  
+  // final String imageUrl;
+  // final String title;
+  // final String description;
+  // final double price;
 
+  // const PopularProducts(this.imageUrl, this.title, this.description, this.price );
+  
   @override
   Widget build(BuildContext context) {
+    final productsAttributes = Provider.of<Product>(context);
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
@@ -26,8 +38,8 @@ class PopularProducts extends StatelessWidget {
                   Container(
                     height: 140,
                     decoration: BoxDecoration(
-                      image: DecorationImage(image: NetworkImage('https://m.media-amazon.com/images/I/71D9ImsvEtL._UY500_.jpg'),
-                      fit: BoxFit.fill)
+                      image: DecorationImage(image: NetworkImage(productsAttributes.imageUrl),
+                      fit: BoxFit.contain)
                     ),
                   ),
                   Positioned(
@@ -50,7 +62,7 @@ class PopularProducts extends StatelessWidget {
                     child: Container(
                       padding: EdgeInsets.all(10),
                       color: Theme.of(context).backgroundColor,
-                      child:Text('\$ 122',
+                      child:Text(productsAttributes.price.toString(),
                       style: TextStyle(
                         color: Theme.of(context).textSelectionColor
                       )),
@@ -64,18 +76,28 @@ class PopularProducts extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children:[
-                      Text('Title'),
+                      Text(productsAttributes.title,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold
+                      )),
                       Row(
                         children: [
-                        Text('Description'),
+                        Expanded(
+                          flex:5,
+                          child: Text(productsAttributes.description, 
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,)),
                         Spacer(),
-                        Material(
-                          color: Colors.transparent,
-                          child: InkWell(
-                            onTap: (){},
-                            borderRadius: BorderRadius.circular(30.0),
-                            child: Icon(Icons.shopping_cart_rounded,
-                            size: 25,),
+                        Expanded(
+                          flex:1,
+                          child: Material(
+                            color: Colors.transparent,
+                            child: InkWell(
+                              onTap: (){},
+                              borderRadius: BorderRadius.circular(30.0),
+                              child: Icon(Icons.shopping_cart_rounded,
+                              size: 25,),
+                            ),
                           ),
                         )
                       ],)

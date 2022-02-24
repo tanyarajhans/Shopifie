@@ -655,4 +655,11 @@ class Products with ChangeNotifier{
         .toList();
     return _categoryList;
   }
+
+  List<Product> get findPopularProducts{
+    List<Product> _categoryList = _products
+        .where((element) => element.isPopular ==true)
+        .toList();
+    return _categoryList;
+  }
 }
