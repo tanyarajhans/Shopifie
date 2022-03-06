@@ -656,6 +656,11 @@ class Products with ChangeNotifier{
     return _categoryList;
   }
 
+  Product findById(String id) {
+    return _products
+        .firstWhere((element) => element.id==id);
+  }
+
   List<Product> get findPopularProducts{
     List<Product> _categoryList = _products
         .where((element) => element.isPopular ==true)

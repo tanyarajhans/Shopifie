@@ -2,6 +2,8 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shopifie/inner_screens/brands_navigation_rail.dart';
+import 'package:shopifie/inner_screens/product_details.dart';
 
 import '../models/product.dart';
 
@@ -13,7 +15,7 @@ class PopularProducts extends StatelessWidget {
   // final double price;
 
   // const PopularProducts(this.imageUrl, this.title, this.description, this.price );
-  
+
   @override
   Widget build(BuildContext context) {
     final productsAttributes = Provider.of<Product>(context);
@@ -31,7 +33,9 @@ class PopularProducts extends StatelessWidget {
           color: Colors.transparent,
           child: InkWell(
             borderRadius: BorderRadius.only(bottomLeft: Radius.circular(10), bottomRight: Radius.circular(10)),
-            onTap: (){},
+            onTap: (){
+              Navigator.pushNamed(context, ProductDetails.routeName, arguments: productsAttributes.id);
+            },
             child: Column(
               children: [
                 Stack(children: [
@@ -93,7 +97,9 @@ class PopularProducts extends StatelessWidget {
                           child: Material(
                             color: Colors.transparent,
                             child: InkWell(
-                              onTap: (){},
+                              onTap: (){
+                                
+                              },
                               borderRadius: BorderRadius.circular(30.0),
                               child: Icon(Icons.shopping_cart_rounded,
                               size: 25,),

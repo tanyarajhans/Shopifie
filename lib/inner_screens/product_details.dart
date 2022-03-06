@@ -2,7 +2,9 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shopifie/models/product.dart';
 import 'package:shopifie/provider/dark_theme_provider.dart';
+import 'package:shopifie/provider/products.dart';
 import 'package:shopifie/screens/wishlist.dart';
 
 import '../consts/colors.dart';
@@ -22,6 +24,10 @@ class _ProductDetailsState extends State<ProductDetails> {
   @override
   Widget build(BuildContext context) {
     final themeState = Provider.of<DarkThemeProvider>(context);
+    final productsData = Provider.of<Products>(context);
+    final productId = ModalRoute.of(context)?.settings.arguments as String; //id received
+    final productsList = productsData.products;
+    final productAttributes = productsData.findById(productId);
     return Scaffold(
       body: Stack(
         children: <Widget>[
@@ -30,7 +36,7 @@ class _ProductDetailsState extends State<ProductDetails> {
             height: MediaQuery.of(context).size.height * 0.45,
             width: double.infinity,
             child: Image.network(
-              'https://m.media-amazon.com/images/I/71D9ImsvEtL._UY500_.jpg',
+              productAttributes.imageUrl,
             ),
           ),
           SingleChildScrollView(
@@ -93,7 +99,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                             Container(
                               width: MediaQuery.of(context).size.width * 0.9,
                               child: Text(
-                                'Title',
+                               productAttributes.title,
                                 maxLines: 2,
                                 style: TextStyle(
                                   // color: Theme.of(context).textSelectionColor,
@@ -106,7 +112,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                               height: 8,
                             ),
                             Text(
-                              'US \$ 172',
+                              productAttributes.price.toString(),
                               style: TextStyle(
                                   color: themeState.darkTheme? Theme.of(context).disabledColor : ColorsConsts.subTitle,
                                   fontWeight: FontWeight.bold,
@@ -129,7 +135,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                       Padding(
                         padding: const EdgeInsets.all(16.0),
                         child: Text(
-                          'Description',
+                          productAttributes.description,
                           style: TextStyle(
                             fontWeight: FontWeight.w400,
                             fontSize: 21.0,
@@ -146,13 +152,13 @@ class _ProductDetailsState extends State<ProductDetails> {
                           height: 1,
                         ),
                       ),
-                      _details(themeState.darkTheme, 'Brand: ', 'Brand name'),
+                      _details(themeState.darkTheme, 'Brand: ', productAttributes.brand),
                       _details(themeState.darkTheme, 'Quantity: ',
-                          '12 left'),
+                          productAttributes.quantity.toString()),
                       _details(themeState.darkTheme, 'Category: ',
-                          'Cat Name'),
+                          productAttributes.productCategoryName),
                       _details(themeState.darkTheme, 'Popularity: ',
-                          'Popular'),
+                          productAttributes.isPopular?'Popular':'Not Popular'),
                       SizedBox(
                         height: 15,
                       ),
@@ -219,13 +225,17 @@ class _ProductDetailsState extends State<ProductDetails> {
                   margin: EdgeInsets.only(bottom: 30),
                   width: double.infinity,
                   height: 340,
-                  // child: ListView.builder(
-                  //   itemCount:7,
-                  //   scrollDirection: Axis.horizontal,
-                  //   // itemBuilder: (BuildContext ctx, int index) {
-                  //   //   return ;
-                  //   // },
-                  // ),
+                  child: ListView.builder(
+                    itemCount:7,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (BuildContext ctx, int index) {
+                      return ChangeNotifierProvider.value(
+              value: productsList[index],
+              child: FeedProducts(
+                
+              ));
+                    },
+                  ),
                 ),
               ],
             ),
