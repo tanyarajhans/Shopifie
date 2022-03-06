@@ -22,7 +22,7 @@ class _CartFullState extends State<CartFull> {
         topRight: Radius.circular(16.0),
         
         ),
-        color: Colors.blueAccent,
+        color: Theme.of(context).backgroundColor,
       ),
       
       child: Row(
