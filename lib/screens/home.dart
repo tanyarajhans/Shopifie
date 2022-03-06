@@ -192,7 +192,7 @@ List _brandImages = [
                   TextButton(onPressed: (
                   ){
                     Navigator.of(context)
-                            .pushNamed(Feeds.routeName, arguments: 'popular');
+                            .pushNamed(Feeds.routeName, arguments: 'Popular');
                   }, child: Text('View All', 
                   style: TextStyle(
                     fontWeight: FontWeight.w800,
