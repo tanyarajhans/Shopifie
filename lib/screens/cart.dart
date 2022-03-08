@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shopifie/provider/cart_provider.dart';
 import 'package:shopifie/widget/cart_empty.dart';
 import 'package:shopifie/widget/cart_full.dart';
 
@@ -9,8 +11,9 @@ class Cart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List products = [];
-    return !products.isEmpty? Scaffold(
+    final cartProvider = Provider.of<CartProvider>(context);
+    
+    return cartProvider.getCartItems.isEmpty? Scaffold(
       body:  CartEmpty()
     ) : Scaffold(
       bottomSheet: CheckOutSection(),
@@ -23,7 +26,14 @@ class Cart extends StatelessWidget {
       ),
       body: Container(
         margin: EdgeInsets.only(bottom: 10.0),
-        child: ListView.builder(itemCount: 5,itemBuilder: (context, index) => CartFull())),
+        child: ListView.builder(itemCount: cartProvider.getCartItems.length,itemBuilder: (context, index) => CartFull(
+          cartProvider.getCartItems.values.toList()[index].id,
+          cartProvider.getCartItems.keys.toList()[index],
+          cartProvider.getCartItems.values.toList()[index].price,
+          cartProvider.getCartItems.values.toList()[index].quantity,
+          cartProvider.getCartItems.values.toList()[index].title,
+          cartProvider.getCartItems.values.toList()[index].imageUrl
+        ))),
       
     );
   }

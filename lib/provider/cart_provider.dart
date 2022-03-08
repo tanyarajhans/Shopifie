@@ -16,5 +16,28 @@ class CartProvider with ChangeNotifier{
     });
     return total;
   }
-
+  
+  void addToCart(String productId, double price, String title, String imageUrl){
+    if(_cartItems.containsKey(productId)){
+      _cartItems.update(productId, (existingCartItem) =>
+        CartAttr(
+          existingCartItem.id,
+          existingCartItem.title,
+          existingCartItem.quantity+1,
+          existingCartItem.price,
+          existingCartItem.imageUrl,
+      ));
+    }
+    else{
+      _cartItems.putIfAbsent(productId, ()=>
+        CartAttr(
+          DateTime.now().toString(),
+          title,
+          1,
+          price,
+          imageUrl,
+      ));
+    }
+    notifyListeners();
+  }
 }

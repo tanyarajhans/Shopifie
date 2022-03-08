@@ -8,6 +8,7 @@ import 'package:shopifie/provider/products.dart';
 import 'package:shopifie/screens/wishlist.dart';
 
 import '../consts/colors.dart';
+import '../provider/cart_provider.dart';
 import '../screens/cart.dart';
 import '../widget/feeds_products.dart';
 
@@ -28,6 +29,7 @@ class _ProductDetailsState extends State<ProductDetails> {
     final productId = ModalRoute.of(context)?.settings.arguments as String; //id received
     final productsList = productsData.products;
     final productAttributes = productsData.findById(productId);
+    final cartProvider = Provider.of<CartProvider>(context);
     return Scaffold(
       body: Stack(
         children: <Widget>[
@@ -290,8 +292,11 @@ class _ProductDetailsState extends State<ProductDetails> {
                       shape: RoundedRectangleBorder(side: BorderSide.none),
                       color: Colors.redAccent.shade400,
                       onPressed:
-                          (){},
-                      child: Text('Add to Cart'.toUpperCase(),
+                          cartProvider.getCartItems.containsKey(productId)?null:(){
+                            cartProvider.addToCart(productId, productAttributes.price, productAttributes.title, productAttributes.imageUrl);
+                          },
+                      child: Text(
+                        cartProvider.getCartItems.containsKey(productId)?'In cart':'Add to Cart'.toUpperCase(),
                         style: TextStyle(fontSize: 16, color: Colors.white),
                       ),
                     ),
