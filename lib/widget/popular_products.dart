@@ -6,6 +6,7 @@ import 'package:shopifie/inner_screens/brands_navigation_rail.dart';
 import 'package:shopifie/inner_screens/product_details.dart';
 
 import '../models/product.dart';
+import '../provider/cart_provider.dart';
 
 class PopularProducts extends StatelessWidget {
   
@@ -19,6 +20,7 @@ class PopularProducts extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final productsAttributes = Provider.of<Product>(context);
+    final cartProvider = Provider.of<CartProvider>(context);
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
@@ -97,11 +99,14 @@ class PopularProducts extends StatelessWidget {
                           child: Material(
                             color: Colors.transparent,
                             child: InkWell(
-                              onTap: (){
-                                
+                              onTap: 
+                                 cartProvider.getCartItems.containsKey(productsAttributes.id)?null:(){
+                            cartProvider.addToCart(productsAttributes.id, productsAttributes.price, productsAttributes.title, productsAttributes.imageUrl);
+
+                          
                               },
                               borderRadius: BorderRadius.circular(30.0),
-                              child: Icon(Icons.shopping_cart_rounded,
+                              child: Icon(cartProvider.getCartItems.containsKey(productsAttributes.id)?Icons.check_box : Icons.shopping_cart_rounded,
                               size: 25,),
                             ),
                           ),

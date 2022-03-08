@@ -40,4 +40,19 @@ class CartProvider with ChangeNotifier{
     }
     notifyListeners();
   }
+
+  void reduceItemByOne(String productId, double price, String title, String imageUrl){
+    if(_cartItems.containsKey(productId)){
+      _cartItems.update(productId, (existingCartItem) =>
+        CartAttr(
+          existingCartItem.id,
+          existingCartItem.title,
+          existingCartItem.quantity-1,
+          existingCartItem.price,
+          existingCartItem.imageUrl,
+      ));
+    }
+    
+    notifyListeners();
+  }
 }

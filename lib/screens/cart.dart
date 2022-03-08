@@ -26,13 +26,17 @@ class Cart extends StatelessWidget {
       ),
       body: Container(
         margin: EdgeInsets.only(bottom: 10.0),
-        child: ListView.builder(itemCount: cartProvider.getCartItems.length,itemBuilder: (context, index) => CartFull(
-          cartProvider.getCartItems.values.toList()[index].id,
-          cartProvider.getCartItems.keys.toList()[index],
-          cartProvider.getCartItems.values.toList()[index].price,
-          cartProvider.getCartItems.values.toList()[index].quantity,
-          cartProvider.getCartItems.values.toList()[index].title,
-          cartProvider.getCartItems.values.toList()[index].imageUrl
+        child: ListView.builder(itemCount: cartProvider.getCartItems.length,itemBuilder: (context, index) => 
+        ChangeNotifierProvider.value(
+          value: cartProvider.getCartItems.values.toList()[index],
+          child: CartFull(
+            cartProvider.getCartItems.keys.toList()[index],
+            // cartProvider.getCartItems.keys.toList()[index],
+            // cartProvider.getCartItems.values.toList()[index].price,
+            // cartProvider.getCartItems.values.toList()[index].quantity,
+            // cartProvider.getCartItems.values.toList()[index].title,
+            // cartProvider.getCartItems.values.toList()[index].imageUrl
+          ),
         ))),
       
     );
