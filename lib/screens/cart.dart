@@ -5,22 +5,51 @@ import 'package:shopifie/widget/cart_empty.dart';
 import 'package:shopifie/widget/cart_full.dart';
 
 import '../consts/colors.dart';
+import '../services/global_methods.dart';
 
 class Cart extends StatelessWidget {
   static const routeName = '/Cart';
 
   @override
   Widget build(BuildContext context) {
+    GlobalMethods globalMethods = GlobalMethods();
     final cartProvider = Provider.of<CartProvider>(context);
-    
+    Future<void> _showDialog(String title, String subtitle, Function fct) async {
+    showDialog(context: context, builder: (BuildContext ctx){
+      return AlertDialog(
+        title: Row(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(right: 6.0),
+              child: Image.network('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0AVvdQVH2LdtsYFauXEnnrgt2CG1diwowkJ1qLwGXLjJrzStCxFnH4p2rEDA9jkomk54&usqp=CAU',
+              height: 20,
+              width: 20,),
+            ),
+            Text(title)
+          ],
+        ),
+        content: Text(subtitle),
+        actions: [
+          TextButton(onPressed: () => Navigator.pop(context), child: Text('Cancel')),
+          TextButton(onPressed: (){
+            fct();
+            Navigator.pop(context);
+          }, child: Text('OK')),
+        ],
+      );
+    });
+  }
     return cartProvider.getCartItems.isEmpty? Scaffold(
       body:  CartEmpty()
     ) : Scaffold(
-      bottomSheet: CheckOutSection(),
+      bottomSheet: CheckOutSection(cartProvider.totalAmount),
       appBar: AppBar(
         
-        title: const Text('Cart Itmes Count:', textAlign: TextAlign.left,),
-        actions: [IconButton(onPressed: (){}, 
+        title:  Text('Cart Items Count: (${cartProvider.getCartItems.length})'),
+        actions: [IconButton(onPressed: (){
+          globalMethods.showDialogg('Clear cart', 'Cart will be cleared', () => cartProvider.clearCart(), context);
+          // cartProvider.clearCart();
+        }, 
         icon: Icon(
           Icons.delete))],
       ),
@@ -47,7 +76,8 @@ class Cart extends StatelessWidget {
 }
 
 class CheckOutSection extends StatelessWidget {
-  
+    double subtotal;
+    CheckOutSection(this.subtotal);
     @override
     Widget build(BuildContext context) {
       return Container(
@@ -101,7 +131,7 @@ class CheckOutSection extends StatelessWidget {
                     fontWeight: FontWeight.w600,
                     
                   )),
-                  Text('US \$170.80', 
+                  Text('US ${subtotal.toStringAsFixed(3)}', 
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Colors.blue,

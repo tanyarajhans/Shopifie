@@ -4,6 +4,7 @@ import 'package:shopifie/consts/colors.dart';
 import 'package:shopifie/models/cart_attributes.dart';
 import 'package:shopifie/provider/cart_provider.dart';
 import 'package:shopifie/provider/dark_theme_provider.dart';
+import 'package:shopifie/services/global_methods.dart';
 
 import '../inner_screens/product_details.dart';
 
@@ -15,6 +16,7 @@ class CartFull extends StatefulWidget {
   // final String title;
   // final String imageUrl;
   CartFull(this.productId);
+ 
 
   @override
   _CartFullState createState() => _CartFullState();
@@ -22,7 +24,11 @@ class CartFull extends StatefulWidget {
 
 class _CartFullState extends State<CartFull> {
   @override
+
+  
+
   Widget build(BuildContext context) {
+    GlobalMethods globalMethods = GlobalMethods();
     final themeChange = Provider.of<DarkThemeProvider>(context);
     final cartAttr = Provider.of<CartAttr>(context);
     final cartProvider = Provider.of<CartProvider>(context);
@@ -48,7 +54,7 @@ class _CartFullState extends State<CartFull> {
               width: 130,
               decoration: BoxDecoration(
                 image: DecorationImage(image: NetworkImage(cartAttr.imageUrl),
-                fit: BoxFit.fill
+                //fit: BoxFit.fill
                 )
               ),),
                 Flexible(
@@ -66,7 +72,10 @@ class _CartFullState extends State<CartFull> {
                           Material(
                             color: Colors.transparent,
                             child: InkWell(
-                              onTap:(){},
+                              onTap:(){
+                                globalMethods.showDialogg('Remove item', 'Product will be removed from the cart', () => cartProvider.removeItem(widget.productId), context);
+                            //    cartProvider.removeItem(widget.productId);
+                              },
                               borderRadius: BorderRadius.circular(32.0),
                               child: Container(
                                 height: 50,
@@ -107,7 +116,7 @@ class _CartFullState extends State<CartFull> {
                             color: Colors.transparent,
                             child: InkWell(
                               onTap: cartAttr.quantity>0? (){
-                                cartProvider.reduceItemByOne(widget.productId, cartAttr.price, cartAttr.title, cartAttr.imageUrl);
+                                cartProvider.reduceItemByOne(widget.productId);
                               }: (){},
                               borderRadius: BorderRadius.circular(4.0),
                               child: Container(

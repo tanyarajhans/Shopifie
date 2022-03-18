@@ -41,7 +41,7 @@ class CartProvider with ChangeNotifier{
     notifyListeners();
   }
 
-  void reduceItemByOne(String productId, double price, String title, String imageUrl){
+  void reduceItemByOne(String productId, ){
     if(_cartItems.containsKey(productId)){
       _cartItems.update(productId, (existingCartItem) =>
         CartAttr(
@@ -53,6 +53,16 @@ class CartProvider with ChangeNotifier{
       ));
     }
     
+    notifyListeners();
+  }
+
+  void removeItem(String productId){
+    _cartItems.remove(productId);
+    notifyListeners();
+  }
+
+  void clearCart(){
+    _cartItems.clear();
     notifyListeners();
   }
 }
