@@ -9,6 +9,7 @@ import 'package:shopifie/screens/wishlist.dart';
 
 import '../consts/colors.dart';
 import '../provider/cart_provider.dart';
+import '../provider/wishlist_provider.dart';
 import '../screens/cart.dart';
 import '../widget/feeds_products.dart';
 
@@ -30,6 +31,8 @@ class _ProductDetailsState extends State<ProductDetails> {
     final productsList = productsData.products;
     final productAttributes = productsData.findById(productId);
     final cartProvider = Provider.of<CartProvider>(context);
+    final wishlistProvider = Provider.of<WishListProvider>(context);
+
     return Scaffold(
       body: Stack(
         children: <Widget>[
@@ -342,11 +345,12 @@ class _ProductDetailsState extends State<ProductDetails> {
                     child: InkWell(
                       splashColor: ColorsConsts.favColor,
                       onTap: () {
-                        
+                        wishlistProvider.addToWishList(productAttributes.id, productAttributes.price, productAttributes.title, productAttributes.imageUrl);
                       },
                       child: Center(
                         child: Icon(Icons.favorite,
-                          color:ColorsConsts.white,
+                          color:wishlistProvider.getWishListItems.containsKey(productId)
+                                  ? Colors.red : ColorsConsts.white,
                         ),
                       ),
                     ),

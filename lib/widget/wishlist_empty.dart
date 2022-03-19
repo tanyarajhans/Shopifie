@@ -4,6 +4,7 @@ import 'package:shopifie/consts/colors.dart';
 import 'package:shopifie/models/dark_theme_preferences.dart';
 
 import '../provider/dark_theme_provider.dart';
+import '../screens/feeds.dart';
 
 class WishlistEmpty extends StatelessWidget {
 
@@ -50,7 +51,9 @@ class WishlistEmpty extends StatelessWidget {
           width: MediaQuery.of(context).size.width*0.9,
           height: MediaQuery.of(context).size.height*0.05,
           child: ElevatedButton(
-            onPressed: (){}, 
+            onPressed: (){
+              Navigator.of(context).pushNamed(Feeds.routeName);
+            }, 
             child: Text('Add a wish',
           textAlign: TextAlign.center,
           style: TextStyle(

@@ -13,6 +13,8 @@ import 'package:shopifie/screens/feeds.dart';
 import 'package:shopifie/screens/home.dart';
 import 'package:shopifie/screens/wishlist.dart';
 
+import 'provider/wishlist_provider.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -49,6 +51,9 @@ class _MyAppState extends State<MyApp> {
       }),
       ChangeNotifierProvider(create: (_){
         return CartProvider();
+      }),
+      ChangeNotifierProvider(create: (_){
+        return WishListProvider();
       }),
     ],
      child: Consumer<DarkThemeProvider>(

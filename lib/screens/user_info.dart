@@ -3,6 +3,7 @@ import 'package:list_tile_switch/list_tile_switch.dart';
 import 'package:provider/provider.dart';
 import 'package:shopifie/consts/colors.dart';
 import 'package:shopifie/provider/dark_theme_provider.dart';
+import 'package:shopifie/screens/cart.dart';
 import 'package:shopifie/screens/wishlist.dart';
 
 class UserInfo extends StatefulWidget {
@@ -134,7 +135,7 @@ class _UserInfoState extends State<UserInfo> {
                     ),
                     ListTile(
                       onTap: () {
-                        
+                        Navigator.pushNamed(context, Cart.routeName);
                       },
                       title: Text('Cart'),
                       trailing: Icon(Icons.chevron_right_rounded),

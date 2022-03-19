@@ -10,7 +10,7 @@ class Feeds extends StatelessWidget {
   static const routeName = '/Feeds';
   @override
   Widget build(BuildContext context) {
-    final popular = ModalRoute.of(context)?.settings.arguments as String;
+    final String? popular = ModalRoute.of(context)!.settings.arguments.toString()??"";
     final productsProvider = Provider.of<Products>(context);
     List<Product> productsList = productsProvider.products;
     if(popular=='Popular'){

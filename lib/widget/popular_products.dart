@@ -7,6 +7,7 @@ import 'package:shopifie/inner_screens/product_details.dart';
 
 import '../models/product.dart';
 import '../provider/cart_provider.dart';
+import '../provider/wishlist_provider.dart';
 
 class PopularProducts extends StatelessWidget {
   
@@ -21,6 +22,7 @@ class PopularProducts extends StatelessWidget {
   Widget build(BuildContext context) {
     final productsAttributes = Provider.of<Product>(context);
     final cartProvider = Provider.of<CartProvider>(context);
+    final wishlistProvider = Provider.of<WishListProvider>(context);
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
@@ -59,7 +61,7 @@ class PopularProducts extends StatelessWidget {
                     right: 10,
                     top:8,
                     child: Icon(Icons.star_outlined,
-                    color: Colors.white,
+                    color: wishlistProvider.getWishListItems.containsKey(productsAttributes.id) ? Colors.red : Colors.white,
                     ),
                   ),
                   Positioned(
