@@ -261,26 +261,56 @@ class _ProductDetailsState extends State<ProductDetails> {
                 actions: <Widget>[
                 
 
-                        IconButton(
-                          icon:Icon(Icons.favorite,
-                          color: ColorsConsts.favColor,
+                        Consumer<WishListProvider>(
+                          builder: (context, value, child) => Badge(
+                            badgeColor: ColorsConsts.cartBadgeColor,
+                            animationType: BadgeAnimationType.slide,
+                            toAnimate: true,
+                            position: BadgePosition.topEnd(top: 5, end: 7),
+                            badgeContent: Text(wishlistProvider.getWishListItems.length.toString(),
+                            style: TextStyle(color: Colors.white)),
+                            child: IconButton(
+                              icon:Icon(Icons.favorite,
+                              color: ColorsConsts.favColor,
+                            ),
+                            onPressed: () {
+                              Navigator.of(context)
+                                  .pushNamed(Wishlist.routeName);
+                            },
+                                                
+                                            ),
+                          ),
                         ),
-                        onPressed: () {
-                          Navigator.of(context)
-                              .pushNamed(Wishlist.routeName);
-                        },
-                      
-                  ),
-                  IconButton(
-                        icon: Icon(
-                          Icons.shopping_bag,
-                          color: ColorsConsts.cartColor,
+                        Consumer<CartProvider>(
+                          builder: (context, value, child) => Badge(
+                            badgeColor: ColorsConsts.cartBadgeColor,
+                            animationType: BadgeAnimationType.slide,
+                            toAnimate: true,
+                            position: BadgePosition.topEnd(top: 5, end: 7),
+                            badgeContent: Text(cartProvider.getCartItems.length.toString(),
+                            style: TextStyle(color: Colors.white)),
+                            child: IconButton(
+                              icon:Icon(Icons.shopping_cart,
+                              color: ColorsConsts.cartColor,
+                            ),
+                            onPressed: () {
+                              Navigator.of(context)
+                                  .pushNamed(Cart.routeName);
+                            },
+                                                
+                                            ),
+                          ),
                         ),
-                        onPressed: () {
-                          Navigator.of(context).pushNamed(Cart.routeName);
-                        },
+                  // IconButton(
+                  //       icon: Icon(
+                  //         Icons.shopping_bag,
+                  //         color: ColorsConsts.cartColor,
+                  //       ),
+                  //       onPressed: () {
+                  //         Navigator.of(context).pushNamed(Cart.routeName);
+                  //       },
                       
-                  ),
+                  // ),
                 ]),
           ),
           Align(
