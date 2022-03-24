@@ -258,16 +258,14 @@ class _ProductDetailsState extends State<ProductDetails> {
                   style:
                       TextStyle(fontSize: 16.0, fontWeight: FontWeight.normal),
                 ),
-                actions: <Widget>[
-                
-
-                        Consumer<WishListProvider>(
+                actions: [
+          Consumer<WishListProvider>(
                           builder: (context, value, child) => Badge(
                             badgeColor: ColorsConsts.cartBadgeColor,
                             animationType: BadgeAnimationType.slide,
                             toAnimate: true,
                             position: BadgePosition.topEnd(top: 5, end: 7),
-                            badgeContent: Text(wishlistProvider.getWishListItems.length.toString(),
+                            badgeContent: Text(value.getWishListItems.length.toString(),
                             style: TextStyle(color: Colors.white)),
                             child: IconButton(
                               icon:Icon(Icons.favorite,
@@ -287,7 +285,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                             animationType: BadgeAnimationType.slide,
                             toAnimate: true,
                             position: BadgePosition.topEnd(top: 5, end: 7),
-                            badgeContent: Text(cartProvider.getCartItems.length.toString(),
+                            badgeContent: Text(value.getCartItems.length.toString(),
                             style: TextStyle(color: Colors.white)),
                             child: IconButton(
                               icon:Icon(Icons.shopping_cart,
@@ -300,7 +298,8 @@ class _ProductDetailsState extends State<ProductDetails> {
                                                 
                                             ),
                           ),
-                        ),
+                        ),],
+                ),
                   // IconButton(
                   //       icon: Icon(
                   //         Icons.shopping_bag,
@@ -309,10 +308,11 @@ class _ProductDetailsState extends State<ProductDetails> {
                   //       onPressed: () {
                   //         Navigator.of(context).pushNamed(Cart.routeName);
                   //       },
-                      
-                  // ),
-                ]),
-          ),
+             
+          
+         
+      ),
+      
           Align(
               alignment: Alignment.bottomCenter,
               child: Row(children: [
