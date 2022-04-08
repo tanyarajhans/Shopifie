@@ -11,6 +11,7 @@ import 'package:shopifie/screens/bottom_bar.dart';
 import 'package:shopifie/screens/cart.dart';
 import 'package:shopifie/screens/feeds.dart';
 import 'package:shopifie/screens/home.dart';
+import 'package:shopifie/screens/landing_page.dart';
 import 'package:shopifie/screens/wishlist.dart';
 
 import 'provider/wishlist_provider.dart';
@@ -61,7 +62,7 @@ class _MyAppState extends State<MyApp> {
       return MaterialApp(
         title: 'Flutter Demo',
         theme: Styles.themeData(themeChangeProvider.darkTheme, context),
-        home: BottomBar(),
+        home: LandingPage(),
         routes: {
           BrandNavigationRailScreen.routeName: (context) => BrandNavigationRailScreen(),
           Cart.routeName : (context) => Cart(),
