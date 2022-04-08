@@ -15,9 +15,11 @@ class FeedDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final productsData = Provider.of<Products>(context, listen: false);
-
+    final productsData = Provider.of<Products>(context);
+    final productsList = productsData.products;
+    final productAttributes = productsData.findById(productId);
     final cartProvider = Provider.of<CartProvider>(context);
+    final wishlistProvider = Provider.of<WishListProvider>(context);
 
     final favsProvider = Provider.of<WishListProvider>(context);
 

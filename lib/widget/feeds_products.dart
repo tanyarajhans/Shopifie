@@ -1,6 +1,7 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shopifie/widget/feeds_dialog.dart';
 
 import '../inner_screens/product_details.dart';
 import '../models/product.dart';
@@ -96,7 +97,10 @@ class _FeedProductsState extends State<FeedProducts> {
                     Material(
                       color: Colors.transparent,
                       child: InkWell(
-                        onTap:(){},
+                        onTap:(){
+                          showDialog(context: context, builder: (BuildContext context) => 
+                          FeedDialog(productsAttributes.id));
+                        },
                         borderRadius: BorderRadius.circular(18.0),
                         child: Icon(Icons.add,
                         color: Colors.grey),

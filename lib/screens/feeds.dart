@@ -1,6 +1,5 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:provider/provider.dart';
 import 'package:shopifie/provider/products.dart';
 import 'package:shopifie/screens/wishlist.dart';
@@ -20,7 +19,7 @@ class Feeds extends StatelessWidget {
     final productsProvider = Provider.of<Products>(context);
 
     List<Product> productsList = productsProvider.products;
-    
+
     if(popular=='Popular'){
       productsList = productsProvider.findPopularProducts;
     }
