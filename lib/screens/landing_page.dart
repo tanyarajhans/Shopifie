@@ -4,6 +4,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:provider/provider.dart';
 import 'package:shopifie/consts/colors.dart';
 
+import 'auth/login.dart';
+
 class LandingPage extends StatefulWidget {
   const LandingPage({ Key? key }) : super(key: key);
 
@@ -97,7 +99,9 @@ class _LandingPageState extends State<LandingPage> with TickerProviderStateMixin
                       ),
                     )),
                     
-                      onPressed: (){}, 
+                      onPressed: (){
+                        Navigator.pushNamed(context, Login.routeName);
+                      }, 
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [

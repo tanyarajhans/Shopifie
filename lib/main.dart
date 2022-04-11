@@ -7,6 +7,7 @@ import 'package:shopifie/inner_screens/product_details.dart';
 import 'package:shopifie/provider/cart_provider.dart';
 import 'package:shopifie/provider/dark_theme_provider.dart';
 import 'package:shopifie/provider/products.dart';
+import 'package:shopifie/screens/auth/login.dart';
 import 'package:shopifie/screens/bottom_bar.dart';
 import 'package:shopifie/screens/cart.dart';
 import 'package:shopifie/screens/feeds.dart';
@@ -69,7 +70,8 @@ class _MyAppState extends State<MyApp> {
           Feeds.routeName : (context) => Feeds(),
           Wishlist.routeName : (context) => Wishlist(),
           ProductDetails.routeName :(context) => ProductDetails(),
-          CategoriesFeeds.routeName:(context) => CategoriesFeeds()
+          CategoriesFeeds.routeName:(context) => CategoriesFeeds(),
+          Login.routeName:(context) => Login(),
         },
       );
       }

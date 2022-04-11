@@ -43,6 +43,7 @@ dependencies:
   carousel_slider: ^4.0.0
   card_swiper: ^2.0.1
   cached_network_image: ^3.2.0
+  wave: ^0.2.0
   
 
 dev_dependencies:
@@ -84,6 +85,7 @@ flutter:
     - assets/images/Huawei.jpeg
     - assets/images/nike.jpeg
     - assets/images/samsung.jpeg
+    - assets/images/store.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
