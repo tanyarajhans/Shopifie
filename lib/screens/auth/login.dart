@@ -24,6 +24,14 @@ class _LoginState extends State<Login> {
     super.dispose();
   }
 
+  void _submitForm(){
+    final isValid = _formKey.currentState!.validate();
+    FocusScope.of(context).unfocus();
+    if(isValid){
+      _formKey.currentState!.save();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -97,6 +105,10 @@ class _LoginState extends State<Login> {
                       }
                       return null;
                     },
+                    textInputAction: TextInputAction.next,
+                    onEditingComplete: () {
+                      FocusScope.of(context).requestFocus(_passwordFocusNode);
+                    },
                     keyboardType: TextInputType.emailAddress,
                     decoration: InputDecoration(border: const UnderlineInputBorder(),
                     filled: true, prefixIcon: Icon(Icons.email),
@@ -137,7 +149,7 @@ class _LoginState extends State<Login> {
                       _password=value!;
                     },
                     obscureText: _obscureText,
-                  //  onEditingComplete: ,
+                   onEditingComplete: _submitForm,
                   ),
                 ),
                 //  Align(
@@ -175,7 +187,7 @@ class _LoginState extends State<Login> {
                                         ),
                                       )),
                                       onPressed:(){
-                                    //    Navigator.pushNamed(context, Login.routeName);
+                                       _submitForm();
                                       },
                                       child: Row(
                                         mainAxisAlignment:
