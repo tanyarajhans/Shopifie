@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:shopifie/consts/colors.dart';
 
 import 'auth/login.dart';
+import 'auth/signup.dart';
 
 class LandingPage extends StatefulWidget {
   const LandingPage({ Key? key }) : super(key: key);
@@ -130,7 +131,9 @@ class _LandingPageState extends State<LandingPage> with TickerProviderStateMixin
                         side: BorderSide(color: ColorsConsts.backgroundColor),
                       ),
                     )),
-                      onPressed: (){}, 
+                      onPressed: (){
+                        Navigator.pushNamed(context, SignUp.routeName);
+                      }, 
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
