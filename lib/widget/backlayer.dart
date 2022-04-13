@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:shopifie/inner_screens/upload_product.dart';
+import 'package:shopifie/screens/wishlist.dart';
 
 import '../consts/colors.dart';
 import '../screens/cart.dart';
@@ -120,11 +122,11 @@ class BackLayerMenu extends StatelessWidget {
                 }, 'Cart', 1),
                 const SizedBox(height: 10.0),
                 content(context, () {
-                  navigateTo(context, Feeds.routeName);
+                  navigateTo(context, Wishlist.routeName);
                 }, 'Wishlist', 2),
                 const SizedBox(height: 10.0),
                 content(context, () {
-                  navigateTo(context, Cart.routeName);
+                  navigateTo(context, UploadProductForm.routeName);
                 }, 'Upload a new product', 3),
               ],
             ),
@@ -147,9 +149,9 @@ class BackLayerMenu extends StatelessWidget {
     );
   }
 
-  Widget content(BuildContext ctx, Function fct, String text, int index) {
+  Widget content(BuildContext ctx, Function()? fct, String text, int index) {
     return InkWell(
-      onTap: (){},
+      onTap: fct,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

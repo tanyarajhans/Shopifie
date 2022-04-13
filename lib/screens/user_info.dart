@@ -177,7 +177,9 @@ class _UserInfoState extends State<UserInfo> {
 		switchActiveColor: Colors.indigo,  
 		title: Text('Dark Theme'),  
 	 ),
-   UserListTile('Logout', '', 4, (){}),
+   UserListTile('Logout', '', 4, (){
+     Navigator.canPop(context)?Navigator.pop(context):null;
+   }),
         ]
       )
                 

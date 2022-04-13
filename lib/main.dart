@@ -4,6 +4,7 @@ import 'package:shopifie/consts/theme_data.dart';
 import 'package:shopifie/inner_screens/brands_navigation_rail.dart';
 import 'package:shopifie/inner_screens/categories_feeds.dart';
 import 'package:shopifie/inner_screens/product_details.dart';
+import 'package:shopifie/inner_screens/upload_product.dart';
 import 'package:shopifie/provider/cart_provider.dart';
 import 'package:shopifie/provider/dark_theme_provider.dart';
 import 'package:shopifie/provider/products.dart';
@@ -14,6 +15,7 @@ import 'package:shopifie/screens/cart.dart';
 import 'package:shopifie/screens/feeds.dart';
 import 'package:shopifie/screens/home.dart';
 import 'package:shopifie/screens/landing_page.dart';
+import 'package:shopifie/screens/main_screen.dart';
 import 'package:shopifie/screens/wishlist.dart';
 
 import 'provider/wishlist_provider.dart';
@@ -64,7 +66,7 @@ class _MyAppState extends State<MyApp> {
       return MaterialApp(
         title: 'Flutter Demo',
         theme: Styles.themeData(themeChangeProvider.darkTheme, context),
-        home: LandingPage(),
+        home: MainScreen(),
         routes: {
           BrandNavigationRailScreen.routeName: (context) => BrandNavigationRailScreen(),
           Cart.routeName : (context) => Cart(),
@@ -74,6 +76,8 @@ class _MyAppState extends State<MyApp> {
           CategoriesFeeds.routeName:(context) => CategoriesFeeds(),
           Login.routeName:(context) => Login(),
           SignUp.routeName:(context) => SignUp(),
+          BottomBar.routeName:(context) => BottomBar(),
+          UploadProductForm.routeName:(context) => UploadProductForm()
         },
       );
       }

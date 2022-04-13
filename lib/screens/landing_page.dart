@@ -6,6 +6,7 @@ import 'package:shopifie/consts/colors.dart';
 
 import 'auth/login.dart';
 import 'auth/signup.dart';
+import 'bottom_bar.dart';
 
 class LandingPage extends StatefulWidget {
   const LandingPage({ Key? key }) : super(key: key);
@@ -187,7 +188,9 @@ class _LandingPageState extends State<LandingPage> with TickerProviderStateMixin
                   borderSide: BorderSide(width: 2, color: Colors.red ),
                   child: Text('Google +')
                   ),
-                  OutlineButton(onPressed: (){}, 
+                  OutlineButton(onPressed: (){
+                    Navigator.pushNamed(context, BottomBar.routeName);
+                  }, 
                   shape: StadiumBorder(),
                   highlightedBorderColor: Colors.deepPurple.shade200,
                   borderSide: BorderSide(width: 2, color: Colors.deepPurple ),

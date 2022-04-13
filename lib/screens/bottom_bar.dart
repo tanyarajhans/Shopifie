@@ -9,6 +9,7 @@ import 'package:shopifie/screens/search.dart';
 import 'package:shopifie/screens/user_info.dart';
 
 class BottomBar extends StatefulWidget {
+  static const routeName = '/BottomBar';
   const BottomBar({ Key? key }) : super(key: key);
 
   @override

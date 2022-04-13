@@ -20,7 +20,7 @@ class _SignUpState extends State<SignUp> {
   String _fullName = '';
   String _password = '';
   int _phoneNumber=0;
-  late File _pickedImage; 
+  File? _pickedImage; 
   bool _obscureText = true;
   final FocusNode _passwordFocusNode = FocusNode();
   final FocusNode _emailFocusNode = FocusNode();
@@ -118,7 +118,8 @@ class _SignUpState extends State<SignUp> {
                   backgroundColor: ColorsConsts.gradiendLEnd,
                   child: CircleAvatar(
                     radius: 65,
-                //    backgroundImage: FileImage(_pickedImage),
+                    backgroundColor: ColorsConsts.gradiendFEnd,
+                    backgroundImage: _pickedImage==null? null: FileImage(_pickedImage!),
                   ),
                 ),
               ),
