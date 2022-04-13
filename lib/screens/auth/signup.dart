@@ -2,6 +2,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:wave/config.dart';
 import 'package:wave/wave.dart';
 
@@ -40,6 +41,34 @@ class _SignUpState extends State<SignUp> {
     if(isValid){
       _formKey.currentState!.save();
     }
+  }
+
+  void _pickImageCamera() async {
+    final picker = ImagePicker();
+    final pickedImage =
+        await picker.pickImage(source: ImageSource.camera, imageQuality: 10);
+    final pickedImageFile = File(pickedImage!.path);
+    setState(() {
+      _pickedImage = pickedImageFile;
+    });
+    Navigator.pop(context);
+  }
+
+  void _pickImageGallery() async {
+    final picker = ImagePicker();
+    final pickedImage = await picker.pickImage(source: ImageSource.gallery);
+    final pickedImageFile = File(pickedImage!.path);
+    setState(() {
+      _pickedImage = pickedImageFile;
+    });
+    Navigator.pop(context);
+  }
+
+  void _remove() {
+    setState(() {
+      _pickedImage =File('');
+    });
+    Navigator.pop(context);
   }
 
   @override
@@ -114,7 +143,7 @@ class _SignUpState extends State<SignUp> {
                                       child: ListBody(
                                         children: [
                                           InkWell(
-                                            onTap: (){},
+                                            onTap: _pickImageCamera,
                                             splashColor: Colors.purpleAccent,
                                             child: Row(
                                               children: [
@@ -139,7 +168,7 @@ class _SignUpState extends State<SignUp> {
                                             ),
                                           ),
                                           InkWell(
-                                            onTap: (){},
+                                            onTap: _pickImageGallery,
                                             splashColor: Colors.purpleAccent,
                                             child: Row(
                                               children: [
@@ -164,7 +193,7 @@ class _SignUpState extends State<SignUp> {
                                             ),
                                           ),
                                           InkWell(
-                                            onTap: (){},
+                                            onTap: _remove,
                                             splashColor: Colors.purpleAccent,
                                             child: Row(
                                               children: [
