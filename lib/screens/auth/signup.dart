@@ -1,3 +1,6 @@
+//import 'dart:html';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:wave/config.dart';
 import 'package:wave/wave.dart';
@@ -16,6 +19,7 @@ class _SignUpState extends State<SignUp> {
   String _fullName = '';
   String _password = '';
   int _phoneNumber=0;
+  late File _pickedImage; 
   bool _obscureText = true;
   final FocusNode _passwordFocusNode = FocusNode();
   final FocusNode _emailFocusNode = FocusNode();
@@ -75,6 +79,126 @@ class _SignUpState extends State<SignUp> {
              
           SizedBox(
             height: 30,
+          ),
+          Stack(
+            children: [
+              Container(
+                margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+                child: CircleAvatar(
+                  radius: 71,
+                  backgroundColor: ColorsConsts.gradiendLEnd,
+                  child: CircleAvatar(
+                    radius: 65,
+                //    backgroundImage: FileImage(_pickedImage),
+                  ),
+                ),
+              ),
+              Positioned(
+                top:120,
+                left:110,
+                child: RawMaterialButton(
+                  elevation: 10,
+                  fillColor: ColorsConsts.gradiendLEnd,
+                  child: Icon(Icons.add_a_photo),
+                  padding: EdgeInsets.all(15),
+                  shape: CircleBorder(),
+                  onPressed: (){
+                    showDialog(context: context, builder: (BuildContext context){
+                      return AlertDialog(
+                        title: Text('Choose option',
+                        style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            color: ColorsConsts.gradiendLStart),
+                        ),
+                        content: SingleChildScrollView(
+                                      child: ListBody(
+                                        children: [
+                                          InkWell(
+                                            onTap: (){},
+                                            splashColor: Colors.purpleAccent,
+                                            child: Row(
+                                              children: [
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(8.0),
+                                                  child: Icon(
+                                                    Icons.camera,
+                                                    color: Colors.purpleAccent,
+                                                  ),
+                                                ),
+                                                Text(
+                                                  'Camera',
+                                                  style: TextStyle(
+                                                      fontSize: 18,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      color:
+                                                          ColorsConsts.title),
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                          InkWell(
+                                            onTap: (){},
+                                            splashColor: Colors.purpleAccent,
+                                            child: Row(
+                                              children: [
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(8.0),
+                                                  child: Icon(
+                                                    Icons.image,
+                                                    color: Colors.purpleAccent,
+                                                  ),
+                                                ),
+                                                Text(
+                                                  'Gallery',
+                                                  style: TextStyle(
+                                                      fontSize: 18,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      color:
+                                                          ColorsConsts.title),
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                          InkWell(
+                                            onTap: (){},
+                                            splashColor: Colors.purpleAccent,
+                                            child: Row(
+                                              children: [
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(8.0),
+                                                  child: Icon(
+                                                    Icons.remove_circle,
+                                                    color: Colors.red,
+                                                  ),
+                                                ),
+                                                Text(
+                                                  'Remove',
+                                                  style: TextStyle(
+                                                      fontSize: 18,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      color: Colors.red),
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                      
+
+                                       ],
+                                      ),
+                                    ),
+                        
+                      );
+                    });
+                  }
+                )
+              )
+            ],
           ),
           Form(
               key: _formKey,
@@ -143,6 +267,7 @@ class _SignUpState extends State<SignUp> {
                       return null;
                     },
                     keyboardType: TextInputType.emailAddress,
+                    textInputAction: TextInputAction.next,
                     focusNode: _passwordFocusNode,
                     decoration: InputDecoration(border: const UnderlineInputBorder(),
                     filled: true, 
@@ -162,7 +287,34 @@ class _SignUpState extends State<SignUp> {
                       _password=value!;
                     },
                     obscureText: _obscureText,
-                   onEditingComplete: _submitForm,
+                   onEditingComplete: (){
+                     FocusScope.of(context).requestFocus(_phoneFocusNode);
+                   },
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: TextFormField(
+                    key: ValueKey('Phone Number'),
+                    validator: (value){
+                      if(value!.isEmpty){
+                        return 'Please enter a valid phone no.';
+                      }
+                      return null;
+                    },
+                    focusNode: _phoneFocusNode,
+                    
+                    keyboardType: TextInputType.phone,
+                    decoration: InputDecoration(border: const UnderlineInputBorder(),
+                    filled: true, 
+                    prefixIcon: Icon(Icons.call),
+                    
+                    labelText: 'Phone Number',
+                    fillColor: Theme.of(context).backgroundColor),
+                    onSaved: (value){
+                      _phoneNumber=int.parse(value!);
+                    },
+                    onEditingComplete: _submitForm,
                   ),
                 ),
                 //  Align(
