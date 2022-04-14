@@ -1,6 +1,7 @@
 //import 'dart:html';
 import 'dart:io';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:wave/config.dart';
@@ -26,6 +27,7 @@ class _SignUpState extends State<SignUp> {
   final FocusNode _emailFocusNode = FocusNode();
   final FocusNode _phoneFocusNode = FocusNode();
   final _formKey = GlobalKey<FormState>();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
   @override
   void dispose() {
@@ -41,6 +43,7 @@ class _SignUpState extends State<SignUp> {
     if(isValid){
       _formKey.currentState!.save();
     }
+    _auth.createUserWithEmailAndPassword(email: _emailAddress.toLowerCase().trim(), password: _password.trim());
   }
 
   void _pickImageCamera() async {
