@@ -2,8 +2,10 @@
 import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:shopifie/services/global_methods.dart';
 import 'package:wave/config.dart';
 import 'package:wave/wave.dart';
 
@@ -28,6 +30,8 @@ class _SignUpState extends State<SignUp> {
   final FocusNode _phoneFocusNode = FocusNode();
   final _formKey = GlobalKey<FormState>();
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  GlobalMethods _globalMethods = GlobalMethods();
+  bool _isLoading=false;
 
   @override
   void dispose() {
@@ -37,13 +41,28 @@ class _SignUpState extends State<SignUp> {
     super.dispose();
   }
 
-  void _submitForm(){
+  void _submitForm() async {
     final isValid = _formKey.currentState!.validate();
     FocusScope.of(context).unfocus();
     if(isValid){
+      setState(() {
+        _isLoading=true;
+      });
       _formKey.currentState!.save();
+    try{
+        await  _auth.createUserWithEmailAndPassword(email: _emailAddress.toLowerCase().trim(), password: _password.trim());
+
     }
-    _auth.createUserWithEmailAndPassword(email: _emailAddress.toLowerCase().trim(), password: _password.trim());
+    on FirebaseAuthException catch (error){
+      _globalMethods.showAuthError(error.message.toString(), context);
+      print(error);
+    }
+    finally{
+      setState(() {
+        _isLoading=false;
+      });
+    }
+    }
   }
 
   void _pickImageCamera() async {
@@ -372,6 +391,8 @@ class _SignUpState extends State<SignUp> {
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             SizedBox(width: 10),
+                            _isLoading ?
+                            CircularProgressIndicator():
                             ElevatedButton(
                                       style: ButtonStyle(
                                           shape: MaterialStateProperty.all<

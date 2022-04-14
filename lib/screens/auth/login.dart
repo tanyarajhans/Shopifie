@@ -1,8 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:wave/config.dart';
 import 'package:wave/wave.dart';
 
 import '../../consts/colors.dart';
+import '../../services/global_methods.dart';
 
 class Login extends StatefulWidget {
   const Login({ Key? key }) : super(key: key);
@@ -18,17 +20,37 @@ class _LoginState extends State<Login> {
   final FocusNode _passwordFocusNode = FocusNode();
   final _formKey = GlobalKey<FormState>();
 
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  GlobalMethods _globalMethods = GlobalMethods();
+  bool _isLoading=false;
+
   @override
   void dispose() {
     _passwordFocusNode.dispose();
     super.dispose();
   }
 
-  void _submitForm(){
+  void _submitForm() async{
     final isValid = _formKey.currentState!.validate();
     FocusScope.of(context).unfocus();
     if(isValid){
+      setState(() {
+        _isLoading=true;
+      });
       _formKey.currentState!.save();
+    try{
+        await  _auth.signInWithEmailAndPassword(email: _emailAddress.toLowerCase().trim(), password: _password.trim()).then((value) => Navigator.canPop(context)?Navigator.pop(context):null);
+
+    }
+    on FirebaseAuthException catch (error){
+      _globalMethods.showAuthError(error.message.toString(), context);
+      print(error);
+    }
+    finally{
+      setState(() {
+        _isLoading=false;
+      });
+    }
     }
   }
 
@@ -174,6 +196,8 @@ class _LoginState extends State<Login> {
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             SizedBox(width: 10),
+                            _isLoading?
+                            CircularProgressIndicator():
                             ElevatedButton(
                                       style: ButtonStyle(
                                           shape: MaterialStateProperty.all<

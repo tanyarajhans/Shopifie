@@ -1,3 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:list_tile_switch/list_tile_switch.dart';
 import 'package:provider/provider.dart';
@@ -14,7 +16,7 @@ class UserInfo extends StatefulWidget {
 ScrollController _scrollController = ScrollController();
 class _UserInfoState extends State<UserInfo> {
   
-  
+  final FirebaseAuth _auth =FirebaseAuth.instance;
   var top=0.0;
   @override
   void initState() {
@@ -178,8 +180,39 @@ class _UserInfoState extends State<UserInfo> {
 		title: Text('Dark Theme'),  
 	 ),
    UserListTile('Logout', '', 4, (){
-     Navigator.canPop(context)?Navigator.pop(context):null;
-   }),
+     showDialog(context: context, builder: (BuildContext ctx){
+      return AlertDialog(
+        title: Row(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(right: 6.0),
+              child: Image.network('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0AVvdQVH2LdtsYFauXEnnrgt2CG1diwowkJ1qLwGXLjJrzStCxFnH4p2rEDA9jkomk54&usqp=CAU',
+              height: 20,
+              width: 20,),
+            ),
+            Padding(padding: const EdgeInsets.all(8.0),
+            child: Text('Sign Out'),
+            )
+          ],
+        ),
+        content: Text('Do you want to sign out?'),
+        actions: [
+          TextButton(onPressed: (){
+            Navigator.pop(context);
+            
+          }, child: Text('Cancel')),
+          TextButton(onPressed: () async {
+            await _auth.signOut().then( (value) =>  Navigator.pop(context));;
+            
+          }, child: Text('OK')),
+        ],
+      );
+    });
+  }
+   
+     
+   //  Navigator.canPop(context)?Navigator.pop(context):null;
+          ),
         ]
       )
                 

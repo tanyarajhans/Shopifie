@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:shopifie/screens/user_state.dart';
 import 'firebase_options.dart';
 import 'package:provider/provider.dart';
 import 'package:shopifie/consts/theme_data.dart';
@@ -97,7 +98,7 @@ class _MyAppState extends State<MyApp> {
         return MaterialApp(
           title: 'Flutter Demo',
           theme: Styles.themeData(themeChangeProvider.darkTheme, context),
-          home: MainScreen(),
+          home: UserState(),
           routes: {
             BrandNavigationRailScreen.routeName: (context) => BrandNavigationRailScreen(),
             Cart.routeName : (context) => Cart(),
